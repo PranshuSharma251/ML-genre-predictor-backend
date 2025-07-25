@@ -6,14 +6,12 @@ from pydub.utils import which
 from fastapi.middleware.cors import CORSMiddleware
 
 
-AudioSegment.converter = which(r"C:\Users\USER\Downloads\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffmpeg.exe")
-AudioSegment.ffprobe   = which(r"C:\Users\USER\Downloads\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffprobe.exe")
 
 # ────────────────── FastAPI setup ──────────────────
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://ml-music-genre-predictor.vercel.app/"],  # you can replace "*" with your frontend domain for better security
+    allow_origins=["https://ml-music-genre-predictor.vercel.app/","https://ml-music-genre-predictor.vercel.app"],  # you can replace "*" with your frontend domain for better security
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -106,7 +104,7 @@ async def predict(file: UploadFile = File(...)):
             for i in top3_indices
         ]
     except Exception as e:
-        return {"erro": str(e)}
+        return {"error": str(e)}
     finally:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
