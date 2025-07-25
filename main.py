@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import shutil, os, numpy as np, librosa, joblib
 from pydub import AudioSegment
 from pydub.utils import which
+from fastapi.middleware.cors import CORSMiddleware
+
 
 AudioSegment.converter = which(r"C:\Users\USER\Downloads\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffmpeg.exe")
 AudioSegment.ffprobe   = which(r"C:\Users\USER\Downloads\ffmpeg-7.1.1-essentials_build\ffmpeg-7.1.1-essentials_build\bin\ffprobe.exe")
@@ -11,7 +13,8 @@ AudioSegment.ffprobe   = which(r"C:\Users\USER\Downloads\ffmpeg-7.1.1-essentials
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["https://ml-music-genre-predictor.vercel.app/"],  # you can replace "*" with your frontend domain for better security
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
