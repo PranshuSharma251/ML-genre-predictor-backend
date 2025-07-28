@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://tonescope.vercel.app/","https://ml-music-genre-predictor.vercel.app"],  # you can replace "*" with your frontend domain for better security
+    allow_origins=["https://tonescope.vercel.app"],  # you can replace "*" with your frontend domain for better security
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
